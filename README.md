@@ -7,6 +7,9 @@
 - [x] Create React base project inside `client` folder  `npm create vite .`
 - [x] Add resources
 - [x] Add react router `npm i react-router`
-- [] Copy html from template index.html into App.jsx(conver to jsx)
-- [] Extract Home Page componets
+- [x] Copy html from template index.html into App.jsx(conver to jsx)
 - [] Setup react-router
+- [x] Extract Home Page componets (Header, Home, Home and Footer) `npm i react-router `
+- [x] Add BrowserRouter component
+- [x] Add Routes
+- [x] Dynamic navigation
