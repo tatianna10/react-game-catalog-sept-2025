@@ -1,4 +1,37 @@
+import { useState } from "react";
+import { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router";
+
 export default function Details() {
+    const navigate = useNavigate();
+    const { gameId } = useParams();
+    const [game, setGames] = useState({});
+
+    const baseUrl = `http://localhost:3030/jsonstore/games`;
+
+    useEffect(() => {
+        fetch(`${baseUrl}/${gameId}`)
+            .then(response => response.json())
+            .then(result => setGames(result))
+            .catch(err => alert(err.message));
+    }, [gameId]);
+
+    const deleteGameHandler = async () => {
+        const isComfirmed = confirm(`Are you sure you want to delete game: ${game.title}`);
+        if (!isComfirmed) {
+            return;
+        }
+
+        try {
+            await fetch(`${baseUrl}/${gameId}`, {
+                method: 'DELETE',
+            });
+            navigate('/games');
+        } catch (err) {
+            alert('Unble to delete game: ', err.message);
+        }
+    };
+
     return (
         <section id="game-details">
             <h1>Game Details</h1>
@@ -6,44 +39,38 @@ export default function Details() {
                 <div className="header-and-image">
                     <img
                         className="game-img"
-                        src="images/elden ring.png"
-                        alt="Elden Ring Cover Art"
+                        src={game.imageUrl}
+                        alt={game.title}
                     />
                     <div className="meta-info">
-                        <h1 className="game-name">Elden Ring</h1>
+                        <h1 className="game-name">{game.title}</h1>
                         <p className="data-row">
                             <span className="label">Genre:</span>
-                            <span className="value">Action RPG</span>
+                            <span className="value">{game.genre}</span>
                         </p>
                         <p className="data-row">
                             <span className="label">Active Players:</span>
-                            <span className="value">100000</span>
+                            <span className="value">{game.players}</span>
                         </p>
                         <p className="data-row">
                             <span className="label">Release Date:</span>
-                            <span className="value">2022-02-25</span>
+                            <span className="value">{game.date}</span>
                         </p>
                     </div>
                     <div className="summary-section">
                         <h2>Summary:</h2>
-                        <p className="text-summary">
-                            Elden Ring is a fantasy action RPG developed by FromSoftware and
-                            Bandai Namco. Set in the Lands Between, players embark on an epic
-                            quest to become the Elden Lord, exploring a vast open world designed
-                            by Hidetaka Miyazaki, with worldbuilding contributed by fantasy author
-                            George R. R. Martin. The game features challenging combat, deep lore,
-                            and extensive character customization.
-                        </p>
+                        <p className="text-summary">{game.summary}</p>
                     </div>
                 </div>
                 {/* Edit/Delete buttons ( Only for creator of this game )  */}
                 <div className="buttons">
-                    <a href="#" className="button">
+                    <Link href="#" className="button">
                         Edit
-                    </a>
-                    <a href="#" className="button">
+                    </Link>
+                    {/* <Link to={`game / ${ gameId } / delete `}className="button">
                         Delete
-                    </a>
+                    </Link> */}
+                    <button className="button" onClick={deleteGameHandler}>Delete</button>
                 </div>
                 <div className="details-comments">
                     <h2>Comments:</h2>
@@ -73,6 +100,5 @@ export default function Details() {
                 </form>
             </article>
         </section>
-
     );
-}
+};
