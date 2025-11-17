@@ -8,7 +8,7 @@
 - [x] Add resources
 - [x] Add react router `npm i react-router`
 - [x] Copy html from template index.html into App.jsx(conver to jsx)
-- [] Setup react-router
+- [x] Setup react-router
 - [x] Extract Home Page componets (Header, Home, Home and Footer) `npm i react-router `
 - [x] Add BrowserRouter component
 - [x] Add Routes
@@ -20,5 +20,6 @@
 
 ## Bonus
 - [x] Add game
+- [] Requester 
 
 
