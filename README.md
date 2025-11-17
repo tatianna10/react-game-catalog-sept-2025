@@ -20,6 +20,6 @@
 
 ## Bonus
 - [x] Add game
-- [] Requester 
+- [x] Requester 
 
 
