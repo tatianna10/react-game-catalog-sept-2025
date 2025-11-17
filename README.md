@@ -15,5 +15,10 @@
 - [x] Dynamic navigation
 - [x] Dynamic catalog
 - [x] Dynamic Home Latest Games
+- [x] Add detaisl page
+- [x] Delete game
+
+## Bonus
+- [x] Add game
 
 

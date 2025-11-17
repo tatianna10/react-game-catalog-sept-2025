@@ -3,25 +3,42 @@ import { useNavigate } from "react-router";
 export default function GameCreate() {
     const navigate = useNavigate();
 
-    const createGameHandler = async (event) => {
-        event.preventDefault();
+   const createGameHandler = async (event) => {
+    event.preventDefault();
 
-        const formData = new FormData(event.target); //the target of the event is the form
+    try {
+        const formData = new FormData(event.target);  //the target of the event is the form
         const data = Object.fromEntries(formData);
+
         data.players = Number(data.players);
         data._createdOn = Date.now();
 
         const response = await fetch('http://localhost:3030/jsonstore/games', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to create game');
+        }
+
         const result = await response.json();
         console.log(result);
+
+        // const result = await request('http://localhost:3030/jsonstore/games', 'POST', data);
+
         navigate('/games');
-    };
+
+    } catch (err) {
+        console.error('Create Game Error:', err.message);
+        alert(err.message);
+    }
+};
+
 
     return (
         <>
