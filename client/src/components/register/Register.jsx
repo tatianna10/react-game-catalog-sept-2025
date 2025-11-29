@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Register({
-    user,
     onRegister,
 }) {
+
+    const navigate = useNavigate();
 
 
     const registerSubmit = (formData) => {
@@ -22,8 +23,8 @@ export default function Register({
         // Register User
         onRegister(email);
 
-
-        // TODO redirect to home page
+        // Redirect to home page
+        navigate('/');
     };
 
     return (

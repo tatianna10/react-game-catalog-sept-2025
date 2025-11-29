@@ -7,11 +7,12 @@ import Details from "./components/details/Details.jsx";
 import GameCreate from "./components/game-create/GameCreate.jsx";
 import Register from "./components/register/register.jsx";
 import { useState } from "react";
+import Login from "./components/login/Login.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
 
-  const register = (email) => {
+  const authHadler = (email) => {
     setUser({
       email,
     });
@@ -25,7 +26,8 @@ function App() {
         <Route path="/games" element={<Catalog />} />
         <Route path="/games/:gameId/details" element={<Details />} />
         <Route path="/games/create" element={<GameCreate />} />
-        <Route path="/register" element={<Register user={user} register={register} />} />
+        <Route path="/register" element={<Register user={user} onRegister={authHadler} />} />
+        <Route path="/login" element={<Login user={user} onLogin={authHadler} />} />
       </Routes>
 
       <Footer />
