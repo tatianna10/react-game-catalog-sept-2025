@@ -6,8 +6,16 @@ import Catalog from "./components/catalog/Catalog.jsx";
 import Details from "./components/details/Details.jsx";
 import GameCreate from "./components/game-create/GameCreate.jsx";
 import Register from "./components/register/register.jsx";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  const register = (email) => {
+    setUser({
+      email,
+    });
+  };
   return (
     <>
 
@@ -17,7 +25,7 @@ function App() {
         <Route path="/games" element={<Catalog />} />
         <Route path="/games/:gameId/details" element={<Details />} />
         <Route path="/games/create" element={<GameCreate />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register user={user} register={register} />} />
       </Routes>
 
       <Footer />

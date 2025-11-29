@@ -1,25 +1,39 @@
-export default function Register() {
+import { useState } from "react";
 
-    const registerSubmit = (FormData) => {
-        const email = FormData.get('email');
-        const password = FormData.get('passwor');
-        const confirmPAssword = FormData.gte('confirm-password');
+export default function Register({
+    user,
+    onRegister,
+}) {
 
-        if (!email || password) {
+
+    const registerSubmit = (formData) => {
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const confirmPassword = formData.get('confirm-password');
+
+        if (!email || !password) {
             return alert('Email and password are required!');
         }
 
-        if (password === confirmPAssword) {
+        if (password !== confirmPassword) {
             return alert('Password missmatch!');
         }
+
+        // Register User
+        onRegister(email);
+
+
+        // TODO redirect to home page
     };
 
     return (
         <section id="register-page" className="content auth">
-            <form id="register">
+            <form id="register" action={registerSubmit}>
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Register</h1>
+                    {user && <h2>You are alreadty registered with {user.email}</h2>}
+
                     <label htmlFor="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Your Email" />
                     <label htmlFor="pass">Password:</label>
