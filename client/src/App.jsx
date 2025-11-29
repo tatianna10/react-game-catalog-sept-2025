@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
-import Home from "./components/home/home.jsx";
+import Home from "./components/home/Home.jsx";
 import Catalog from "./components/catalog/Catalog.jsx";
 import Details from "./components/details/Details.jsx";
 import GameCreate from "./components/game-create/GameCreate.jsx";
+import Register from "./components/register/register.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/games" element={<Catalog />} />
         <Route path="/games/:gameId/details" element={<Details />} />
         <Route path="/games/create" element={<GameCreate />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
       <Footer />
